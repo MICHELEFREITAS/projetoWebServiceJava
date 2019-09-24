@@ -15,13 +15,13 @@ import com.michelefreitas.projetoWebService.services.UserService;
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
+	//faz a injeção de dependencia
 	@Autowired
 	private UserService service;
 	
 	@GetMapping
 	public ResponseEntity<List<User>> findAll(){
 		List<User> list = service.findAll();
-		
 		return ResponseEntity.ok().body(list);
 	}
 	

@@ -16,7 +16,7 @@ import com.michelefreitas.projetoWebService.repositories.UserRepository;
 public class UserService {
 	
 	//@Auto... para Spring faça injeção transparencia para o programador
-	//UserService dependency para UserRepository(injeção dependencia do repository)
+	//UserService dependency para UserRepository(injeção dependencia do repository com @Autowired)
 	@Autowired
 	private UserRepository repository;
 	
