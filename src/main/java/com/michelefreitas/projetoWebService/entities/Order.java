@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -47,6 +49,11 @@ public class Order implements Serializable {
 	//dentro da classe Order temos a coleção de OrderItem
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
+	
+	//1 pedido tem 1 pagamento. Esse order vem da classe Payment.
+	//no caso 1 para 1 mapeando as duas entidade para ter o mesmo id. Se pedido cod 5, pagam também deverá ser cod 5
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	private Payment payment;
 	
 	public Order() {
 	}
@@ -94,6 +101,15 @@ public class Order implements Serializable {
 		this.client = client;
 	}
 	
+	//get e set do payment
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
 	public Set<OrderItem> getItems(){
 		return items;
 	}

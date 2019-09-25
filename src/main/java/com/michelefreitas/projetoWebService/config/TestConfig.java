@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.michelefreitas.projetoWebService.entities.Category;
 import com.michelefreitas.projetoWebService.entities.Order;
 import com.michelefreitas.projetoWebService.entities.OrderItem;
+import com.michelefreitas.projetoWebService.entities.Payment;
 import com.michelefreitas.projetoWebService.entities.Product;
 import com.michelefreitas.projetoWebService.entities.User;
 import com.michelefreitas.projetoWebService.entities.enums.OrderStatus;
@@ -91,6 +92,15 @@ public class TestConfig implements CommandLineRunner{
 		
 		//salvar objetos no BD
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		//pedido o1 com PAID (pagamento) efetuado 2 horas depois
+		Payment pay1 = new Payment(null,Instant.parse("2019-06-20T21:53:07Z"), o1);
+		
+		//Associando pedido 1 com o pagamento pay1
+		o1.setPayment(pay1);
+		
+		//salva novamente o pedido
+		orderRepository.save(o1);
 	}
 	
 	
