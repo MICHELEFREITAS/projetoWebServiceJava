@@ -11,6 +11,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 //Pagamento. 1 pagamento tem 1 pedido e 1 pedido tem 1 pagamento
 //mapeamento objeto relacional JPA são esses @
 @Entity
@@ -24,6 +26,7 @@ public class Payment implements Serializable{
 	private Instant moment;//data
 	
 	//anotações classe dependente pagamento
+	@JsonIgnore
 	@OneToOne//associação 1 para 1
 	@MapsId
 	private Order order;
