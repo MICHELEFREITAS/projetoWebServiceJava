@@ -44,6 +44,7 @@ public class Order implements Serializable {
 	private User client;
 
 	//OrderItem tem o id e o id que tem o pedido
+	//dentro da classe Order temos a coleção de OrderItem
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
 	
