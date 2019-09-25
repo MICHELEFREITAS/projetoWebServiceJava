@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.michelefreitas.projetoWebService.entities.Category;
 import com.michelefreitas.projetoWebService.entities.Order;
+import com.michelefreitas.projetoWebService.entities.OrderItem;
 import com.michelefreitas.projetoWebService.entities.Product;
 import com.michelefreitas.projetoWebService.entities.User;
 import com.michelefreitas.projetoWebService.entities.enums.OrderStatus;
 import com.michelefreitas.projetoWebService.repositories.CategoryRepository;
+import com.michelefreitas.projetoWebService.repositories.OrderItemRepository;
 import com.michelefreitas.projetoWebService.repositories.OrderRepository;
 import com.michelefreitas.projetoWebService.repositories.ProductRepository;
 import com.michelefreitas.projetoWebService.repositories.UserRepository;
@@ -36,6 +38,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	//tudo que estiver dentro desse método será executado quando aplicação for iniciada
 	@Override
@@ -77,6 +82,15 @@ public class TestConfig implements CommandLineRunner{
 	//acessa dados e salva os objetos no BD
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		
+		//pedido 1, produto1, quantidade 2 e o preço reproduzindo do p1
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p4.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p1.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		//salvar objetos no BD
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}
 	
 	
